@@ -18,10 +18,27 @@ class Employee:
     def apply_raise(self):
         self.pay = int(self.pay * self.raise_amount)
 
+    @classmethod
+    def set_raise_amt(cls, amount):
+        cls.raise_amount = amount
 
-print(Employee.num_of_emps)
+    # example of using class method as alternative constructor
+    @classmethod
+    def from_string(cls, emp_str):
+        first, last, pay = emp_str.split("-")
+        return cls(first, last, pay)
 
-emp_1 = Employee("Kiefer", "Soon", 100000)
-emp_2 = Employee("Carin", "Yee", 200000)
 
-print(Employee.num_of_emps)
+emp_1 = Employee("James", "Soo", 100000)
+emp_2 = Employee("Catherine", "Yi", 200000)
+
+Employee.set_raise_amt(1.5)
+
+print(Employee.raise_amount)
+print(emp_1.raise_amount)
+print(emp_2.raise_amount)
+
+emp_3_string = "Jimmy-Goo-2000"
+
+emp_3 = Employee.from_string(emp_3_string)
+print(emp_3.pay)
