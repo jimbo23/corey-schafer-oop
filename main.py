@@ -28,17 +28,26 @@ class Employee:
         first, last, pay = emp_str.split("-")
         return cls(first, last, pay)
 
+    @staticmethod
+    def is_workday(day):
+        if day.weekday() == 5 or day.weekday() == 6:
+            return False
+        return True
+
 
 emp_1 = Employee("James", "Soo", 100000)
 emp_2 = Employee("Catherine", "Yi", 200000)
 
-Employee.set_raise_amt(1.5)
+import datetime
 
-print(Employee.raise_amount)
-print(emp_1.raise_amount)
-print(emp_2.raise_amount)
+today = datetime.date(2022, 9, 24)
+print(Employee.is_workday(today))
 
-emp_3_string = "Jimmy-Goo-2000"
-
-emp_3 = Employee.from_string(emp_3_string)
-print(emp_3.pay)
+# print(Employee.raise_amount)
+# print(emp_1.raise_amount)
+# print(emp_2.raise_amount)
+#
+# emp_3_string = "Jimmy-Goo-2000"
+#
+# emp_3 = Employee.from_string(emp_3_string)
+# print(emp_3.pay)
