@@ -1,4 +1,5 @@
 # Python object-oriented programming
+import datetime
 
 
 class Employee:
@@ -35,19 +36,40 @@ class Employee:
         return True
 
 
-emp_1 = Employee("James", "Soo", 100000)
-emp_2 = Employee("Catherine", "Yi", 200000)
+class Developer(Employee):
+    raise_amount = 1.5
 
-import datetime
+    def __init__(self, first, last, pay, prog_lang):
+        super().__init__(first, last, pay)
+        # alternative: Employee.__init__(first, last, pay)
+        # but ^ less maintainable in the case of multiple inheritance
+        self.prog_lang = prog_lang
 
-today = datetime.date(2022, 9, 24)
-print(Employee.is_workday(today))
 
-# print(Employee.raise_amount)
-# print(emp_1.raise_amount)
-# print(emp_2.raise_amount)
-#
-# emp_3_string = "Jimmy-Goo-2000"
-#
-# emp_3 = Employee.from_string(emp_3_string)
-# print(emp_3.pay)
+class Manager(Employee):
+    def __init__(self, first, last, pay, employees=None):
+        super().__init__(first, last, pay)
+        if employees is None:
+            self.employees = []
+        else:
+            self.employees = employees
+
+    def add_emp(self, emp):
+        if emp not in self.employees:
+            self.employees.append(emp)
+
+    def remove_emp(self, emp):
+        if emp in self.employees:
+            self.employees.remove(emp)
+
+    def print_all_employees(self):
+        for emp in self.employees:
+            print("-->", emp.fullname())
+
+
+dev1 = Developer("James", "Soo", 100000, "Python")
+dev2 = Developer("Catherine", "Yi", 200000, "JavaScript")
+
+manager1 = Manager("Mao", "Li", 1000000, [dev1])
+
+print(issubclass(Employee, Developer))
