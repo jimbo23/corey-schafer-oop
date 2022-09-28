@@ -69,7 +69,3 @@ class Manager(Employee):
 
 dev1 = Developer("James", "Soo", 100000, "Python")
 dev2 = Developer("Catherine", "Yi", 200000, "JavaScript")
-
-manager1 = Manager("Mao", "Li", 1000000, [dev1])
-
-print(issubclass(Employee, Developer))
